@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plano de Aula | Natação - Prof. Matheus</title>
+<style>
+:root{--navy:#10243a;--blue:#087eaf;--cyan:#29c4d8;--bg:#f3f7fb;--ink:#172b3e;--muted:#64788a;--line:#dce7ef;--white:#fff;--green:#168566;--red:#d93838}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,Segoe UI,Arial,sans-serif}
+
+/* CABEÇALHO ANIMADO COM ONDAS REALISTAS E NADADORES */
+header{position:relative;background:linear-gradient(135deg,#061325 0%,#085078 50%,#087eaf 100%);color:white;padding:32px 20px 110px;overflow:hidden}
+
+/* ANIMAÇÃO DOS NADADORES */
+.swimmer-track{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:1}
+.swimmer{position:absolute;fill:#ffffff;opacity:0.25;filter:drop-shadow(0 4px 6px rgba(0,0,0,0.3))}
+
+.swimmer-crawl{top:25px;width:110px;animation:swimRight 18s linear infinite}
+.swimmer-butterfly{top:65px;width:130px;animation:swimLeft 22s linear infinite}
+
+@keyframes swimRight{
+  0%{transform:translateX(-150px) rotate(2deg)}
+  50%{transform:translateX(50vw) rotate(-1deg)}
+  100%{transform:translateX(calc(100vw + 150px)) rotate(2deg)}
+}
+
+@keyframes swimLeft{
+  0%{transform:translateX(calc(100vw + 150px)) scaleX(-1) rotate(-2deg)}
+  50%{transform:translateX(50vw) scaleX(-1) rotate(1deg)}
+  100%{transform:translateX(-150px) scaleX(-1) rotate(-2deg)}
+}
+
+/* ONDAS SVG REALISTAS EM MOVIMENTO (CAMADAS) */
+.waves-wrapper{position:absolute;bottom:0;left:0;width:100%;height:80px;overflow:hidden;pointer-events:none;z-index:2}
+.wave-svg{position:absolute;bottom:0;left:0;width:200%;height:100%}
+
+.wave-layer1{fill:rgba(41,196,216,0.25);animation:waveMove 12s linear infinite}
+.wave-layer2{fill:rgba(224,246,251,0.4);animation:waveMove 8s linear infinite reverse;bottom:-5px}
+.wave-layer3{fill:var(--bg);animation:waveMove 15s linear infinite;bottom:-2px}
+
+@keyframes waveMove{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+
+/* CONTEÚDO DO CABEÇALHO */
+.main-title-centered{position:relative;z-index:3;text-align:center;font-size:clamp(28px,5vw,42px);font-weight:800;margin:0 0 24px 0;letter-spacing:1px;color:#ffffff;text-transform:uppercase;text-shadow:0 2px 10px rgba(0,0,0,0.3)}
+.top{position:relative;z-index:3;max-width:1100px;margin:auto;display:flex;justify-content:space-between;gap:18px;align-items:center}.brand{font-weight:800;letter-spacing:.4px}.tag{color:#bdeefa;font-size:12px;text-transform:uppercase;letter-spacing:1.5px}
+h1{position:relative;z-index:3;font-size:clamp(25px,4vw,38px);line-height:1.15;margin:18px 0 8px;text-align:center;text-shadow:0 2px 8px rgba(0,0,0,0.2)}.sub{position:relative;z-index:3;color:#d1e7f1;margin:0 auto;max-width:650px;text-align:center}
+
+.wrap{position:relative;z-index:4;max-width:1100px;margin:-45px auto 40px;padding:0 18px}.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 10px 30px #0e34500c;margin-bottom:18px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{padding:15px;border-radius:12px;background:#f3f9fc}.stat span{display:block;color:var(--muted);font-size:12px}.stat strong{display:block;font-size:23px;margin-top:3px;color:var(--navy)}
+.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}h2{font-size:19px;margin:0}h3{font-size:16px;margin:0}.small{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:11px;background:white;color:var(--ink);font:inherit}.field textarea{min-height:78px;resize:vertical}
+.workout{display:grid;grid-template-columns:44px 1fr auto;gap:13px;align-items:start;padding:16px 0;border-bottom:1px solid var(--line)}.workout:last-child{border-bottom:0}.num{height:36px;width:36px;border-radius:11px;background:#e4f6fb;color:#087eaf;display:grid;place-items:center;font-weight:800}.details p{margin:4px 0;color:var(--muted);font-size:13px}.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.chip{font-size:11px;font-weight:700;padding:4px 8px;border-radius:99px;background:#eef4f8;color:#466174}.chip.blue{background:#e0f6fb;color:#087eaf}.check{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--muted);white-space:nowrap}.check input{accent-color:var(--green);width:17px;height:17px}
+.btn{border:0;border-radius:10px;padding:11px 15px;font-weight:700;cursor:pointer;font-size:13px}.primary{background:var(--cyan);color:#062e42}.dark{background:var(--navy);color:white}.outline{background:white;border:1px solid var(--line);color:var(--ink)}.danger{background:#ffebee;color:var(--red);border:1px solid #ffcdd2}.actions{display:flex;gap:8px;flex-wrap:wrap}
+.progress{height:8px;background:#e7eef3;border-radius:99px;overflow:hidden;margin-top:10px}.progress div{height:100%;width:0;background:var(--green);transition:width .2s}.note{background:#f0faf7;border:1px solid #ccefe3;border-radius:12px;padding:15px;color:#205b4c}.note strong{display:block;margin-bottom:4px}
+.empty-msg{text-align:center;padding:30px 10px;color:var(--muted);font-style:italic}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:10px 20px 28px}
+
+/* MODAL / JANELA SUSPENSA */
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(16,36,58,0.6);display:none;justify-content:center;align-items:center;z-index:1000;padding:15px}
+.modal-overlay.active{display:flex}
+.modal{background:white;border-radius:18px;padding:24px;width:100%;max-width:520px;box-shadow:0 20px 40px rgba(0,0,0,0.2);max-height:90vh;overflow-y:auto}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.modal-header h3{font-size:20px;color:var(--navy);margin:0}
+.close-btn{background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted)}
+
+@media(max-width:680px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}.workout{grid-template-columns:36px 1fr}.check{grid-column:2}.panel{padding:17px}}
+@media print{body{background:white}.wrap{margin:0 auto}.panel{box-shadow:none;break-inside:avoid}.actions,.check input,header .tag,.modal-overlay,.swimmer-track,.waves-wrapper{display:none!important}header{padding:20px;background:#10243a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.wrap{padding:0 10px}}
+</style>
+</head>
+<body>
+<header>
+  <!-- ANIMATED SWIMMERS BACKGROUND -->
+  <div class="swimmer-track">
+    <svg class="swimmer swimmer-crawl" viewBox="0 0 512 512">
+      <path d="M434.3 194.8c-11.4 0-21.8 5.4-28.5 13.8l-54.8 68.2-73.8-36.9c-12.7-6.4-27.9-3.9-37.8 6.1l-68.5 68.5c-9.4 9.4-9.4 24.6 0 33.9 9.4 9.4 24.6 9.4 33.9 0l55.1-55.1 63.8 31.9c12.2 6.1 26.8 4.2 37.1-4.7l69.7-60.9 22 22c7.8 7.8 20.5 7.8 28.3 0s7.8-20.5 0-28.3l-34.1-34.1c-3.7-3.6-8.8-5.8-14.4-5.8zM112 224c17.7 0 32-14.3 32-32s-14.3-32-32-32-32 14.3-32 32 14.3 32 32 32z"/>
+    </svg>
+    <svg class="swimmer swimmer-butterfly" viewBox="0 0 512 512">
+      <path d="M434.3 194.8c-11.4 0-21.8 5.4-28.5 13.8l-54.8 68.2-73.8-36.9c-12.7-6.4-27.9-3.9-37.8 6.1l-68.5 68.5c-9.4 9.4-9.4 24.6 0 33.9 9.4 9.4 24.6 9.4 33.9 0l55.1-55.1 63.8 31.9c12.2 6.1 26.8 4.2 37.1-4.7l69.7-60.9 22 22c7.8 7.8 20.5 7.8 28.3 0s7.8-20.5 0-28.3l-34.1-34.1c-3.7-3.6-8.8-5.8-14.4-5.8zM112 224c17.7 0 32-14.3 32-32s-14.3-32-32-32-32 14.3-32 32 14.3 32 32 32z"/>
+    </svg>
+  </div>
+
+  <h1 class="main-title-centered">Monte seu treino</h1>
+  <div class="top"><div><div class="brand">AQUA • TREINAMENTO</div><div class="tag">Planejamento individual de natação</div></div><button class="btn primary" onclick="window.print()">Imprimir / salvar PDF</button></div>
+  <h1>Seu treino de hoje começa aqui.</h1>
+  <p class="sub">Uma aula organizada por etapas, com objetivo, distância e orientações do professor. Faça no seu ritmo e priorize a técnica.</p>
+
+  <!-- ANIMATED WAVES LAYER -->
+  <div class="waves-wrapper">
+    <svg class="wave-svg wave-layer1" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,0 C150,90 350,-40 500,40 C650,120 900,10 1200,40 L1200,120 L0,120 Z M1200,0 C1350,90 1550,-40 1700,40 C1850,120 2100,10 2400,40 L2400,120 L1200,120 Z"></path>
+    </svg>
+    <svg class="wave-svg wave-layer2" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,20 C200,80 450,0 700,50 C950,100 1050,20 1200,40 L1200,120 L0,120 Z M1200,20 C1400,80 1650,0 1900,50 C2150,100 2250,20 2400,40 L1200,120 L1200,120 Z"></path>
+    </svg>
+    <svg class="wave-svg wave-layer3" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,40 C180,100 400,20 650,70 C900,120 1080,40 1200,60 L1200,120 L0,120 Z M1200,40 C1380,100 1600,20 1850,70 C2100,120 2280,40 2400,60 L1200,120 L1200,120 Z"></path>
+    </svg>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="panel">
+    <div class="sectionhead"><h2>Resumo da aula</h2><span class="chip blue">Plano do professor</span></div>
+    <div class="stats">
+      <div class="stat"><span>Distância planejada</span><strong id="totalDist">0 m</strong></div>
+      <div class="stat"><span>Etapas</span><strong id="totalSteps">0</strong></div>
+      <div class="stat"><span>Tempo estimado</span><strong id="totalTime">0 min</strong></div>
+      <div class="stat"><span>Concluído</span><strong id="completed">0%</strong></div>
+    </div>
+    <div class="progress"><div id="progressBar"></div></div>
+  </section>
+
+  <section class="panel">
+    <div class="sectionhead"><h2>Identificação da aula</h2><span class="small">Edite os campos antes de enviar</span></div>
+    <div class="grid">
+      <div class="field"><label for="student">ALUNO(A)</label><input id="student" placeholder="Nome do aluno"></div>
+      <div class="field"><label for="teacher">PROFESSOR(A)</label><input id="teacher" value="Matheus" placeholder="Professor(a) de natação"></div>
+      <div class="field"><label for="date">DATA</label><input id="date" type="date"></div>
+      <div class="field"><label for="level">NÍVEL</label><select id="level"><option>Iniciante</option><option selected>Intermediário</option><option>Avançado</option><option>Adaptação individual</option></select></div>
+      <div class="field"><label for="goal">OBJETIVO PRINCIPAL</label><input id="goal" placeholder="Ex: Técnica, coordenação e resistência"></div>
+      <div class="field"><label for="pool">PISCINA</label>
+        <select id="pool">
+          <option value="40" selected>40 metros (Ida e volta)</option>
+          <option value="25">25 metros</option>
+          <option value="50">50 metros (Olímpica)</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="sectionhead">
+      <div><h2>Sequência do treino</h2><div class="small">Marque cada etapa conforme concluir.</div></div>
+      <div class="actions">
+        <button class="btn primary" onclick="openAddModal()">+ Adicionar Nado</button>
+        <button class="btn danger" onclick="clearSheet()">Zerar e Recomeçar Ficha</button>
+        <button class="btn dark" onclick="resetChecks()">Reiniciar Marcar/Desmarcar</button>
+      </div>
+    </div>
+    <div id="workouts"></div>
+  </section>
+
+  <section class="panel">
+    <div class="sectionhead"><h2>Orientações do professor</h2></div>
+    <div class="field"><label for="notes">OBSERVAÇÕES E CUIDADOS</label><textarea id="notes" placeholder="Digite as observações para o aluno..."></textarea></div>
+    <div class="note" style="margin-top:14px"><strong>Mensagem para o aluno</strong><div id="message">O objetivo é evoluir com consistência. Não precisa fazer tudo rápido: cada chegada bem executada conta!</div></div>
+    <div class="field" style="margin-top:14px"><label for="customMessage">PERSONALIZAR MENSAGEM</label><input id="customMessage" placeholder="Escreva uma mensagem para o aluno..." oninput="document.getElementById('message').textContent=this.value || defaultMessage"></div>
+    <div class="actions" style="margin-top:16px"><button class="btn primary" onclick="sharePlan()">Compartilhar plano</button><button class="btn outline" onclick="window.print()">Imprimir / salvar PDF</button><button class="btn outline" onclick="downloadPlan()">Baixar HTML</button></div>
+    <p class="small" id="feedback" aria-live="polite"></p>
+  </section>
+  <footer>Plano demonstrativo — ajuste distância, intensidade e descansos com o professor responsável.</footer>
+</main>
+
+<!-- MODAL PARA ADICIONAR NADO AO TREINO -->
+<div class="modal-overlay" id="addModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Adicionar Nado ao Treino</h3>
+      <button class="close-btn" onclick="closeAddModal()">&times;</button>
+    </div>
+    <form id="stepForm" onsubmit="saveStep(event)">
+      <div class="grid" style="grid-template-columns:1fr; margin-bottom:12px;">
+        <div class="field">
+          <label for="swimStyle">SELECIONE O TIPO DE NADO / ETAPA</label>
+          <select id="swimStyle" onchange="autoFillDesc()">
+            <option value="Aquecimento (Nado Livre)">Aquecimento (Nado Livre)</option>
+            <option value="Aquecimento Medley">Aquecimento Medley</option>
+            <option value="Nado Crawl (Livre)">Nado Crawl (Livre)</option>
+            <option value="Crawl com Palmar">Crawl com Palmar</option>
+            <option value="Crawl com Pés de Pato (Nadadeiras)">Crawl com Pés de Pato (Nadadeiras)</option>
+            <option value="Crawl Respiração 3x1 / 5x1">Crawl Respiração 3x1 / 5x1 (Bilateral)</option>
+            <option value="Nado Costas">Nado Costas</option>
+            <option value="Costas Duplo">Costas Duplo (Simultâneo)</option>
+            <option value="Nado Peito">Nado Peito</option>
+            <option value="Peito Deslize">Peito Deslize (Ênfase no Deslize)</option>
+            <option value="Nado Borboleta">Nado Borboleta</option>
+            <option value="Ondulação Borboleta">Ondulação Borboleta (Subaquático/Prancha)</option>
+            <option value="Medley Completo (4 Estilos)">Medley Completo (4 Estilos)</option>
+            <option value="Medley Invertido">Medley Invertido (Crawl, Peito, Costas, Borboleta)</option>
+            <option value="Série de Pernada (Crawl)">Série de Pernada (Crawl)</option>
+            <option value="Série de Pernada (Costas)">Série de Pernada (Costas)</option>
+            <option value="Série de Pernada (Peito)">Série de Pernada (Peito)</option>
+            <option value="Série de Pernada (Borboleta)">Série de Pernada (Borboleta)</option>
+            <option value="Série de Braçada com Pullbuoy">Série de Braçada com Pullbuoy</option>
+            <option value="Educativo de Braçada">Educativo de Braçada</option>
+            <option value="Educativo de Respiração">Educativo de Respiração</option>
+            <option value="Tiro de Velocidade (Sprint)">Tiro de Velocidade (Sprint)</option>
+            <option value="Resistência Aeróbica">Resistência Aeróbica</option>
+            <option value="Soltagem / Volta à Calma">Soltagem / Volta à Calma</option>
+            <option value="Outro (Personalizado)">Outro (Personalizado...)</option>
+          </select>
+        </div>
+        <div class="field" id="customSwimField" style="display:none; margin-top:10px;">
+          <label for="customSwimInput">NOME DO NADO PERSONALIZADO</label>
+          <input type="text" id="customSwimInput" placeholder="Ex: Crawl Pega-Junta / Pernada de Peito com Prancha">
+        </div>
+      </div>
+      <div class="grid" style="margin-bottom:12px;">
+        <div class="field"><label for="modalLaps">QUANTIDADE DE VOLTAS (IDA E VOLTA - 40m)</label><input type="number" id="modalLaps" value="4" min="1" oninput="calculateDist()" required></div>
+        <div class="field"><label for="modalMeters">DISTÂNCIA TOTAL (m)</label><input type="number" id="modalMeters" value="160" readonly style="background:#f3f7fb"></div>
+        <div class="field"><label for="modalIntensity">INTENSIDADE</label>
+          <select id="modalIntensity">
+            <option>Leve</option>
+            <option selected>Leve a Moderada</option>
+            <option>Moderada</option>
+            <option>Forte</option>
+            <option>Máxima</option>
+          </select>
+        </div>
+        <div class="field"><label for="modalRest">DESCANSO</label><input id="modalRest" value="30 s"></div>
+      </div>
+      <div class="field" style="margin-bottom:12px;"><label for="modalTime">TEMPO ESTIMADO (min)</label><input type="number" id="modalTime" value="6" required></div>
+      <div class="field" style="margin-bottom:18px;"><label for="modalDesc">FOCO TÉCNICO / INSTRUÇÕES</label><textarea id="modalDesc">Nado leve focado na respiração e rotação de ombros.</textarea></div>
+      <div class="actions" style="justify-content:flex-end">
+        <button type="button" class="btn outline" onclick="closeAddModal()">Cancelar</button>
+        <button type="submit" class="btn primary">Salvar Nado</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+const defaultMessage="O objetivo é evoluir com consistência. Não precisa fazer tudo rápido: cada chegada bem executada conta!";
+let steps=[];
+
+function render(){
+ const root=document.getElementById("workouts");
+ root.innerHTML="";
+ 
+ if(steps.length===0){
+  root.innerHTML='<div class="empty-msg">Nenhum nado adicionado. Clique em <strong>"+ Adicionar Nado"</strong> acima para montar o treino.</div>';
+ } else {
+  steps.forEach((s,i)=>{
+   const el=document.createElement("div");el.className="workout";
+   el.innerHTML=`<div class="num">${String(i+1).padStart(2,"0")}</div><div class="details"><h3>${esc(s.name)}</h3><p>${esc(s.desc)}</p><div class="chips"><span class="chip blue">${esc(s.sets)}</span><span class="chip">${s.meters} m</span><span class="chip">${esc(s.intensity)}</span><span class="chip">Descanso: ${esc(s.rest)}</span></div><p>Tempo estimado: ${s.time} min</p></div><label class="check"><input type="checkbox" onchange="updateProgress()"> Concluído</label>`;
+   root.appendChild(el);
+  });
+ }
+ updateTotals();
+}
+
+function esc(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+function updateTotals(){
+ document.getElementById("totalDist").textContent=steps.reduce((a,s)=>a+Number(s.meters||0),0).toLocaleString("pt-BR")+" m";
+ document.getElementById("totalSteps").textContent=steps.length;
+ document.getElementById("totalTime").textContent=steps.reduce((a,s)=>a+Number(s.time||0),0)+" min";
+ updateProgress();
+}
+
+function updateProgress(){
+ const boxes=[...document.querySelectorAll(".check input")];
+ const done=boxes.filter(x=>x.checked).length;
+ const pct=boxes.length?Math.round(done/boxes.length*100):0;
+ document.getElementById("completed").textContent=pct+"%";
+ document.getElementById("progressBar").style.width=pct+"%";
+}
+
+function resetChecks(){
+ document.querySelectorAll(".check input").forEach(x=>x.checked=false);
+ updateProgress();
+}
+
+function clearSheet(){
+ if(confirm("Tem certeza que deseja zerar a ficha e apagar todos os nados adicionados?")){
+  steps = [];
+  render();
+ }
+}
+
+function openAddModal(){
+ document.getElementById("addModal").classList.add("active");
+ calculateDist();
+ autoFillDesc();
+}
+
+function closeAddModal(){
+ document.getElementById("addModal").classList.remove("active");
+}
+
+function calculateDist(){
+ const laps = Number(document.getElementById("modalLaps").value) || 0;
+ const poolSize = Number(document.getElementById("pool").value) || 40;
+ document.getElementById("modalMeters").value = laps * poolSize;
+}
+
+function autoFillDesc(){
+ const style=document.getElementById("swimStyle").value;
+ const descField=document.getElementById("modalDesc");
+ const customField=document.getElementById("customSwimField");
+
+ if(style==="Outro (Personalizado)"){
+   customField.style.display="block";
+   descField.value="Insira as orientações técnicas personalizadas para esta etapa.";
+   return;
+ } else {
+   customField.style.display="none";
+ }
+
+ if(style.includes("Aquecimento (Nado Livre)")) descField.value="Nado livre confortável, soltando ombros e controlando a respiração.";
+ else if(style.includes("Aquecimento Medley")) descField.value="Aquecimento variando os 4 estilos de forma leve para mobilidade articular.";
+ else if(style.includes("Crawl com Palmar")) descField.value="Aumento de força e sensibilidade na fase de tração e propulsão de braçada.";
+ else if(style.includes("Crawl com Pés de Pato")) descField.value="Trabalho de potência de perna, posição corporal elevada e ritmo rápido.";
+ else if(style.includes("Respiração 3x1 / 5x1")) descField.value="Trabalho de capacidade pulmonar e simetria de rotação do tronco (bilateral).";
+ else if(style.includes("Nado Crawl")) descField.value="Alinhamento do corpo, entrada limpa da mão na água e expiração constante.";
+ else if(style.includes("Costas Duplo")) descField.value="Ambos os braços puxam simultaneamente, focando na expansão torácica e pernada contínua.";
+ else if(style.includes("Nado Costas")) descField.value="Manter o quadril elevado, olhar para cima e rotação de ombros constante.";
+ else if(style.includes("Peito Deslize")) descField.value="Contar 2 a 3 segundos de deslize totalmente alinhado após cada pernada.";
+ else if(style.includes("Nado Peito")) descField.value="Sincronia perfeita: puxada, respiração, deslize e pernada bem finalizada.";
+ else if(style.includes("Ondulação Borboleta")) descField.value="Foco na ondulação do quadril sem dobrar excessivamente os joelhos.";
+ else if(style.includes("Nado Borboleta")) descField.value="Entrada suave das mãos, duas pernadas por braçada e respiração baixa.";
+ else if(style.includes("Medley Completo")) descField.value="Transição entre os 4 estilos (Borboleta, Costas, Peito, Crawl) em ritmo moderado.";
+ else if(style.includes("Medley Invertido")) descField.value="Sequência invertida: Crawl, Peito, Costas e Borboleta, trabalhando resistência mental.";
+ else if(style.includes("Série de Pernada (Crawl)")) descField.value="Pernada fortepartindo do quadril, joelhos flexíveis e tornozelos soltos.";
+ else if(style.includes("Série de Pernada (Costas)")) descField.value="Pernada constante mantendo os joelhos dentro da água e quadril alto.";
+ else if(style.includes("Série de Pernada (Peito)")) descField.value="Aceleração no final do chute de peito com rotação externa dos pés.";
+ else if(style.includes("Série de Pernada (Borboleta)")) descField.value="Movimento de chicotada contínuo gerado pelo core e quadril.";
+ else if(style.includes("Pullbuoy")) descField.value="Isolamento de braço: foco total no agarre, tração e rotação do tronco sem perna.";
+ else if(style.includes("Educativo de Braçada")) descField.value="Execução bem pausada (ex: pega-junta, toque no quadril ou arrasto de dedos).";
+ else if(style.includes("Educativo de Respiração")) descField.value="Foco no momento exato de girar a cabeça sem elevar o queixo.";
+ else if(style.includes("Tiro de Velocidade")) descField.value="Esforço máximo de explosão mantendo a frequência e técnica ajustadas.";
+ else if(style.includes("Resistência Aeróbica")) descField.value="Ritmo constante e controlado sem perda de eficiência no nado.";
+ else if(style.includes("Soltagem / Volta à Calma")) descField.value="Nado muito suave para desacelerar o batimento cardíaco e relaxar musculatura.";
+}
+
+function saveStep(e){
+ e.preventDefault();
+ const styleSelect=document.getElementById("swimStyle").value;
+ const customInput=document.getElementById("customSwimInput").value;
+ const name = styleSelect === "Outro (Personalizado)" && customInput.trim() !== "" ? customInput : styleSelect;
+
+ const laps=document.getElementById("modalLaps").value;
+ const meters=Number(document.getElementById("modalMeters").value);
+ const sets=`${laps} × 40 m (ida e volta)`;
+ const intensity=document.getElementById("modalIntensity").value;
+ const rest=document.getElementById("modalRest").value;
+ const time=Number(document.getElementById("modalTime").value);
+ const desc=document.getElementById("modalDesc").value;
+
+ steps.push({name, sets, meters, intensity, rest, time, desc});
+ render();
+ closeAddModal();
+}
+
+function planText(){
+ return `PLANO DE AULA DE NATAÇÃO\nAluno(a): ${document.getElementById("student").value}\nProfessor(a): ${document.getElementById("teacher").value}\nData: ${document.getElementById("date").value}\nNível: ${document.getElementById("level").value}\nObjetivo: ${document.getElementById("goal").value}\nPiscina: ${document.getElementById("pool").options[document.getElementById("pool").selectedIndex].text}\n\n${steps.map((s,i)=>`${i+1}. ${s.name} — ${s.sets}; ${s.meters} m; ${s.intensity}; descanso ${s.rest}.\n${s.desc}`).join("\n\n")}\n\nOrientações:\n${document.getElementById("notes").value}\n\nMensagem: ${document.getElementById("customMessage").value||defaultMessage}`;
+}
+
+async function sharePlan(){
+ const txt=planText();
+ try{
+  if(navigator.share){
+   await navigator.share({title:"Plano de aula de natação",text:txt});
+  }else if(navigator.clipboard){
+   await navigator.clipboard.writeText(txt);
+   document.getElementById("feedback").textContent="Plano copiado. Cole no WhatsApp ou e-mail para enviar ao aluno.";
+  }else{
+   window.prompt("Copie o plano abaixo:",txt);
+  }
+ }catch(e){
+  document.getElementById("feedback").textContent="Compartilhamento cancelado ou indisponível. Você pode imprimir ou baixar o HTML.";
+ }
+}
+
+function downloadPlan(){
+ const blob=new Blob(["<!DOCTYPE html>\n"+document.documentElement.outerHTML],{type:"text/html;charset=utf-8"});
+ const a=document.createElement("a");
+ a.href=URL.createObjectURL(blob);
+ a.download="plano_aula_natacao.html";
+ a.click();
+ URL.revokeObjectURL(a.href);
+}
+
+document.getElementById("date").value=new Date().toLocaleDateString("en-CA");
+render();
+</script>
